@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 
 export interface Entry {
   id: string;
+  date: string;
   title: string;
   description: string;
 }
