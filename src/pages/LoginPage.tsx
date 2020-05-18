@@ -9,6 +9,7 @@ import {
 import React from 'react';
 import { Redirect } from 'react-router';
 import { useAuth } from '../auth';
+import { auth } from '../firebase';
 
 interface Props {
   onLogin: () => void;
@@ -16,6 +17,12 @@ interface Props {
 
 const LoginPage: React.FC<Props> = ({ onLogin }) => {
   const { loggedIn } = useAuth();
+
+  const handleLogin = async () => {
+    const credential = await auth.signInWithEmailAndPassword('test1@example.org', 'test1234');
+    console.log('credential:', credential);
+  };
+
   if (loggedIn) {
     return <Redirect to="/my/entries" />;
   }
@@ -27,7 +34,7 @@ const LoginPage: React.FC<Props> = ({ onLogin }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonButton expand="block" onClick={onLogin}>Login</IonButton>
+        <IonButton expand="block" onClick={handleLogin}>Login</IonButton>
       </IonContent>
     </IonPage>
   );
