@@ -13,6 +13,7 @@ import { trash as trashIcon } from 'ionicons/icons';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { useAuth } from '../auth';
+import { formatDate } from '../date';
 import { firestore } from '../firebase';
 import { Entry, toEntry } from '../models';
 
@@ -45,7 +46,7 @@ const EntryPage: React.FC = () => {
           <IonButtons slot="start">
             <IonBackButton />
           </IonButtons>
-          <IonTitle>{entry?.title}</IonTitle>
+          <IonTitle>{formatDate(entry?.date)}</IonTitle>
           <IonButtons slot="end">
             <IonButton onClick={handleDelete}>
               <IonIcon icon={trashIcon} slot="icon-only" />
@@ -54,7 +55,8 @@ const EntryPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        {entry?.description}
+        <h2>{entry?.title}</h2>
+        <p>{entry?.description}</p>
       </IonContent>
     </IonPage>
   );
